@@ -9,6 +9,7 @@ builder.Services.AddDbContext<Infrastructure.Data.StoreContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<Core.Interfaces.IProductRepository, Infrastructure.Data.ProductRepository>();
 
 var app = builder.Build();
 
