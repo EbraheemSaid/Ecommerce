@@ -13,6 +13,10 @@ namespace Core.Interfaces
         Expression<Func<T, object>>? OrderBy { get; }
         Expression<Func<T, object>>? OrderByDescending { get; }
         bool IsDistinct { get; } // Indicates if the results should be distinct
+        bool IsPagingEnabled { get; } // Indicates if paging is enabled
+        int Take { get; } // Number of records to take
+        int Skip { get; } // Number of records to skip
+        IQueryable<T> ApplyCriteria(IQueryable<T> query); // Method to apply the specification to a query
     }
 
     public interface ISpecification<T, TResult> : ISpecification<T>

@@ -74,5 +74,12 @@ namespace Infrastructure.Data
             return SpecificationEvaluator<T>.GetQuery<T, TResult>(context.Set<T>().AsQueryable(), spec);
 
         }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            var query = context.Set<T>().AsQueryable();
+            query = spec.ApplyCriteria(query); // Apply the specification criteria to the query
+            return await query.CountAsync(); // Count the number of entities matching the specification
+        }
     }
 }

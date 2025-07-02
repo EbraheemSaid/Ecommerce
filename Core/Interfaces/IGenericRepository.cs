@@ -19,8 +19,8 @@ namespace Core.Interfaces
         void Update(T entity);
         void Remove(T entity);
         Task<bool> SaveChangesAsync(); // Returns true if changes were saved, false otherwise
-
         bool Exists(int id); // Checks if an entity with the given ID exists
+        Task<int> CountAsync(ISpecification<T> spec); // Returns the count of entities matching the specification
 
     }
 }
