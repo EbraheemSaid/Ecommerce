@@ -18,7 +18,7 @@ namespace API.Controllers
     {
 
 
-        // GET: api/Productsغ
+        // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand, string? type, string? sort)
         {
@@ -110,14 +110,17 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
         {
             // TODO : Implement logic to retrieve brands from the repository or database
-            return Ok();
+            var spec = new BrandListSpecification();
+            return Ok(await repo.ListAsyncWithSpec(spec));
         }
 
         [HttpGet("Types")]
         public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
         {
             // TODO : Implement logic to retrieve types from the repository or database
-            return Ok();
+            var spec = new TypeListSpecification();
+
+            return Ok(await repo.ListAsyncWithSpec(spec));
         }
 
         private bool ProductExists(int id)

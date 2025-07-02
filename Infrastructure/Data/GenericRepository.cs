@@ -53,9 +53,26 @@ namespace Infrastructure.Data
             return await ApplySpecification(spec).ToListAsync();
         }
 
+
+
+        public async Task<TResult?> GetEntityWithSpec<TResult>(ISpecification<T, TResult> spec)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync(); // Use FirstOrDefaultAsync to get a single entity with the specification
+        }
+
+        public async Task<IReadOnlyList<TResult>> ListAsyncWithSpec<TResult>(ISpecification<T, TResult> spec)
+        {
+            return await ApplySpecification(spec).ToListAsync(); // Use ToListAsync to get a list of entities with the specification
+        }
+
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(context.Set<T>().AsQueryable(), spec);
+        }
+        private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
+        {
+            return SpecificationEvaluator<T>.GetQuery<T, TResult>(context.Set<T>().AsQueryable(), spec);
+
         }
     }
 }
