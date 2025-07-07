@@ -31,3 +31,15 @@ button.match-input-height {
 .mdc-notched-outline__notch {
   border-right-style: none !important;
 }
+
+.mat-mdc-snack-bar-container.snack-error {
+  --mdc-snackbar-container-color: #f44336; /* Red */
+  --mat-snack-bar-button-color: #ffffff; /* White */
+  --mdc-snackbar-supporting-text-color: #ffffff; /* White */
+}
+
+.mat-mdc-snack-bar-container.snack-success {
+  --mdc-snackbar-container-color: #4caf50; /* Green */
+  --mat-snack-bar-button-color: #ffffff; /* White */
+  --mdc-snackbar-supporting-text-color: #ffffff; /* White */
+}
