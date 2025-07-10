@@ -1,13 +1,22 @@
 @if (product) {
 
-<mat-card appearance="raised" routerLink="/shop/{{ product.id }}" class="product-card">
+<mat-card
+  appearance="raised"
+  routerLink="/shop/{{ product.id }}"
+  class="product-card"
+>
   <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" />
   <mat-card-content class="mt-2">
     <h2 class="text-sm font-bold uppercase">{{ product.name }}</h2>
     <p class="font-semibold">{{ product.price | currency }}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-stroked-button color="primary" class="w-full">
+  <mat-card-actions (click)="$event.stopPropagation()">
+    <button
+      mat-stroked-button
+      color="accent"
+      class="w-full"
+      (click)="cartService.addItemToCart(product)"
+    >
       <mat-icon>add_shopping_cart</mat-icon>
       Add to Cart
     </button>
