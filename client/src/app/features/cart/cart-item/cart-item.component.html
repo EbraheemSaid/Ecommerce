@@ -1,50 +1,126 @@
-<div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm mb-4">
-  <div class="flex items-center justify-between gap-6">
+<div
+  class="rounded-lg border border-gray-200 bg-white p-3 sm:p-4 shadow-sm mb-4"
+>
+  <!-- Mobile Layout -->
+  <div class="block sm:hidden space-y-4">
+    <!-- Product Image and Basic Info -->
+    <div class="flex items-center gap-3">
+      <a
+        routerLink="/shop/{{ item().productId }}"
+        class="shrink-0"
+        routerLinkActive="router-link-active"
+      >
+        <img
+          src="{{ item().pictureUrl }}"
+          alt="product image"
+          class="w-16 h-16 rounded-md object-cover"
+        />
+      </a>
+      <div class="flex-1 min-w-0">
+        <a
+          routerLink="/shop/{{ item().productId }}"
+          class="font-medium text-sm block truncate hover:text-blue-600"
+        >
+          {{ item().productName }}
+        </a>
+        <p class="font-bold text-lg text-gray-900 mt-1">
+          {{ item().price | currency }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Quantity Controls and Delete -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button
+          mat-icon-button
+          class="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full w-8 h-8 flex items-center justify-center"
+          (click)="removeFromCart()"
+        >
+          <mat-icon class="text-red-500 text-sm">remove</mat-icon>
+        </button>
+        <div class="font-semibold text-lg px-3 min-w-[2rem] text-center">
+          {{ item().quantity }}
+        </div>
+        <button
+          mat-icon-button
+          class="text-green-500 hover:text-green-700 hover:bg-green-50 rounded-full w-8 h-8 flex items-center justify-center"
+          (click)="addToCart()"
+        >
+          <mat-icon class="text-green-500 text-sm">add</mat-icon>
+        </button>
+      </div>
+      <button
+        mat-button
+        color="warn"
+        class="text-xs px-2"
+        (click)="deleteItem()"
+      >
+        <mat-icon class="text-sm mr-1">delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <!-- Desktop Layout -->
+  <div class="hidden sm:flex items-center justify-between gap-4 lg:gap-6">
     <a
       routerLink="/shop/{{ item().productId }}"
-      class="shrink order-1"
+      class="shrink-0 order-1"
       routerLinkActive="router-link-active"
     >
       <img
         src="{{ item().pictureUrl }}"
         alt="product image"
-        class="w-20 h-20"
+        class="w-16 h-16 sm:w-20 sm:h-20 rounded-md object-cover shadow-sm"
       />
     </a>
-    <div class="flex items-center justify-between order-3">
-      <div class="flex items center align-middle gap-3">
+
+    <!-- Product Info -->
+    <div class="w-full flex-1 space-y-2 order-2 max-w-md">
+      <a
+        routerLink="/shop/{{ item().productId }}"
+        class="font-medium text-sm sm:text-base hover:text-blue-600 block"
+      >
+        {{ item().productName }}
+      </a>
+      <div class="flex items-center gap-4">
+        <button mat-button color="warn" (click)="deleteItem()" class="text-sm">
+          <mat-icon class="mr-1">delete</mat-icon>
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <!-- Quantity Controls -->
+    <div class="flex items-center justify-between order-3 gap-4">
+      <div class="flex items-center gap-2 sm:gap-3">
         <button
           mat-icon-button
-          class="text-red-500 hover:text-red-700 hover:bg-red-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+          class="text-red-500 hover:text-red-700 hover:bg-red-50 hover:shadow-lg rounded-full transition-all duration-200 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
           (click)="removeFromCart()"
         >
           <mat-icon class="text-red-500">remove</mat-icon>
         </button>
-        <div class="font-semibold text-xl mb-1">
+        <div
+          class="font-semibold text-lg sm:text-xl px-2 sm:px-3 min-w-[2rem] sm:min-w-[3rem] text-center"
+        >
           {{ item().quantity }}
         </div>
         <button
           mat-icon-button
-          class="text-green-500 hover:text-green-700 hover:bg-green-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+          class="text-green-500 hover:text-green-700 hover:bg-green-50 hover:shadow-lg rounded-full transition-all duration-200 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center"
           (click)="addToCart()"
         >
           <mat-icon class="text-green-500">add</mat-icon>
         </button>
       </div>
-      <div class="text-end order-4 w-32">
-        <p class="font-bold text-xl">{{ item().price | currency }}</p>
-      </div>
-    </div>
 
-    <div class="w-full flex-1 space-y-4 order-2 max-w-md">
-      <a routerLink="/shop/{{ item().productId }}" class="font-medium">
-        {{ item().productName }}
-      </a>
-      <div class="flex items-center gap-4">
-        <button mat-button color="warn" (click)="deleteItem()">
-          <mat-icon>delete</mat-icon>
-          Delete
-        </button>
+      <!-- Price -->
+      <div class="text-end w-24 sm:w-32">
+        <p class="font-bold text-lg sm:text-xl">
+          {{ item().price | currency }}
+        </p>
       </div>
     </div>
   </div>

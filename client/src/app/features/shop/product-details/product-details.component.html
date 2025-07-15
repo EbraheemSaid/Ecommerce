@@ -1,34 +1,102 @@
 @if (product) {
 
-<section class="py-8">
+<section class="py-4 sm:py-8">
   <div class="max-w-screen-2xl px-4 mx-auto">
-    <div class="grid grid-cols-2 gap-8">
-      <div class="max-w-xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      <!-- Product Image -->
+      <div class="max-w-xl mx-auto lg:mx-0">
         <img
-          class="w-full"
+          class="w-full rounded-lg shadow-lg"
           src="{{ product.pictureUrl }}"
           alt="product image"
         />
       </div>
-      <div>
-        <h1 class="text-2xl font-bold text-gray-900">{{ product.name }}</h1>
-        <div class="mt-4 items-center gap-4 flex">
-          <p class="text-3xl font-extrabold text-gray-900">
+
+      <!-- Product Info -->
+      <div class="space-y-4">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
+          {{ product.name }}
+        </h1>
+
+        <div class="flex items-center gap-4">
+          <p class="text-2xl sm:text-3xl font-extrabold text-gray-900">
             {{ product.price | currency : "USD" : "symbol" }}
           </p>
         </div>
-        <div class="flex gap-4 mt-6">
-          <button mat-flat-button class="match-input-height">
-            <mat-icon>add_shopping_cart</mat-icon>
+
+        <!-- Stock status -->
+        <div class="mt-2">
+          @if (product.quantityInStock > 0) {
+          <span class="text-green-600 font-medium text-sm sm:text-base">
+            {{ product.quantityInStock }} in stock
+          </span>
+          } @else {
+          <span class="text-red-600 font-medium text-sm sm:text-base"
+            >Out of stock</span
+          >
+          }
+        </div>
+
+        <!-- Add to Cart Section -->
+        <div class="flex flex-col sm:flex-row gap-4 mt-6">
+          <button
+            mat-flat-button
+            class="w-full sm:w-auto px-6 py-3 text-sm sm:text-base"
+            (click)="addToCart()"
+            [disabled]="product.quantityInStock === 0 || quantity < 1"
+          >
+            <mat-icon class="mr-2">add_shopping_cart</mat-icon>
             Add to Cart
           </button>
-          <mat-form-field appearance="outline" class="flex">
-            <mat-label>Quantity</mat-label>
-            <input matInput type="number" />
-          </mat-form-field>
+
+          <!-- Quantity Controls -->
+          <div class="flex items-center justify-center sm:justify-start gap-2">
+            <div
+              class="flex items-center bg-gray-100 rounded-full px-2 py-1 shadow-inner border border-gray-200"
+            >
+              <button
+                mat-icon-button
+                (click)="decrementQuantity()"
+                [disabled]="quantity <= 1"
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-600 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Decrease quantity"
+              >
+                <mat-icon class="text-lg">remove</mat-icon>
+              </button>
+
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="quantity"
+                (ngModelChange)="onQuantityChange()"
+                [min]="1"
+                [max]="product.quantityInStock"
+                class="w-14 text-center mx-2 bg-transparent border-none outline-none text-base font-semibold text-gray-900 focus:ring-0 focus:outline-none appearance-none"
+                aria-label="Product quantity"
+              />
+
+              <button
+                mat-icon-button
+                (click)="incrementQuantity()"
+                [disabled]="quantity >= product.quantityInStock"
+                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-600 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Increase quantity"
+              >
+                <mat-icon class="text-lg">add</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
-        <mat-divider></mat-divider>
-        <p class="mt-6 text-gray-500">{{ product.description }}</p>
+
+        <mat-divider class="my-6"></mat-divider>
+
+        <!-- Product Description -->
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            {{ product.description }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
