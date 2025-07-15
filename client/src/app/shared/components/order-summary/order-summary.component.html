@@ -44,6 +44,7 @@
         color="primary"
         class="w-full py-3 text-base font-semibold"
         [disabled]="cartService.itemCount() === 0"
+        routerLink="/checkout"
       >
         <mat-icon class="mr-2">payment</mat-icon>
         Proceed to Checkout
