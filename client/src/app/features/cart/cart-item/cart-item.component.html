@@ -1,0 +1,49 @@
+<div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm mb-4">
+  <div class="flex items-center justify-between gap-6">
+    <a
+      routerLink="/shop/{{ item().productId }}"
+      class="shrink order-1"
+      routerLinkActive="router-link-active"
+    >
+      <img
+        src="{{ item().pictureUrl }}"
+        alt="product image"
+        class="w-20 h-20"
+      />
+    </a>
+    <div class="flex items-center justify-between order-3">
+      <div class="flex items center align-middle gap-3">
+        <button
+          mat-icon-button
+          class="text-red-500 hover:text-red-700 hover:bg-red-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+        >
+          <mat-icon class="text-red-500">remove</mat-icon>
+        </button>
+        <div class="font-semibold text-xl mb-1">
+          {{ item().quantity }}
+        </div>
+        <button
+          mat-icon-button
+          class="text-green-500 hover:text-green-700 hover:bg-green-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+        >
+          <mat-icon class="text-green-500">add</mat-icon>
+        </button>
+      </div>
+      <div class="text-end order-4 w-32">
+        <p class="font-bold text-xl">{{ item().price | currency }}</p>
+      </div>
+    </div>
+
+    <div class="w-full flex-1 space-y-4 order-2 max-w-md">
+      <a routerLink="/shop/{{ item().productId }}" class="font-medium">
+        {{ item().productName }}
+      </a>
+      <div class="flex items-center gap-4">
+        <button mat-button color="warn">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
