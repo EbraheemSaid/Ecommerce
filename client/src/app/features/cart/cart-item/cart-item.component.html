@@ -16,6 +16,7 @@
         <button
           mat-icon-button
           class="text-red-500 hover:text-red-700 hover:bg-red-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+          (click)="removeFromCart()"
         >
           <mat-icon class="text-red-500">remove</mat-icon>
         </button>
@@ -25,6 +26,7 @@
         <button
           mat-icon-button
           class="text-green-500 hover:text-green-700 hover:bg-green-50 hover:shadow-lg rounded-full transition-all duration-200 w-10 h-10 flex items-center justify-center"
+          (click)="addToCart()"
         >
           <mat-icon class="text-green-500">add</mat-icon>
         </button>
@@ -39,7 +41,7 @@
         {{ item().productName }}
       </a>
       <div class="flex items-center gap-4">
-        <button mat-button color="warn">
+        <button mat-button color="warn" (click)="deleteItem()">
           <mat-icon>delete</mat-icon>
           Delete
         </button>

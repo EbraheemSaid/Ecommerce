@@ -1,9 +1,10 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, input, Input, inject } from '@angular/core';
 import { CartItem } from '../../../shared/models/cart';
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -14,4 +15,17 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class CartItemComponent {
   item = input.required<CartItem>();
+  cartService = inject(CartService);
+
+  addToCart() {
+    this.cartService.addItemToCart(this.item(), 1);
+  }
+
+  removeFromCart() {
+    this.cartService.removeItemFromCart(this.item().productId, 1);
+  }
+
+  deleteItem() {
+    this.cartService.removeEntireItemFromCart(this.item().productId);
+  }
 }

@@ -55,6 +55,32 @@ export class CartService {
     cart.items = this.addOrUpdateItem(cart.items, item, quantity);
     this.setCart(cart);
   }
+  removeItemFromCart(productId: number, quantity = 1) {
+    const cart = this.cart();
+    if (!cart) return;
+
+    const itemIndex = cart.items.findIndex((x) => x.productId === productId);
+    if (itemIndex === -1) return;
+
+    const item = cart.items[itemIndex];
+
+    if (item.quantity <= quantity) {
+      // Remove the entire item if quantity to remove is >= current quantity
+      cart.items.splice(itemIndex, 1);
+    } else {
+      // Reduce the quantity
+      item.quantity -= quantity;
+    }
+
+    this.setCart(cart);
+  }
+
+  removeEntireItemFromCart(productId: number) {
+    const cart = this.cart();
+    if (!cart) return;
+    cart.items = cart.items.filter((x) => x.productId !== productId);
+    this.setCart(cart);
+  }
 
   private addOrUpdateItem(
     items: CartItem[],
