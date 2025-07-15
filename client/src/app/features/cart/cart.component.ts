@@ -12,4 +12,14 @@ import { OrderSummaryComponent } from '../../shared/components/order-summary/ord
 })
 export class CartComponent {
   cartService = inject(CartService);
+
+  // Performance debugging method (remove in production)
+  logPerformanceStats() {
+    if (typeof window !== 'undefined' && (window as any).console) {
+      console.table(this.cartService.getPerformanceStats());
+    }
+  }
+
+  // You can call this method from browser dev tools:
+  // angular.getComponent($0).logPerformanceStats()
 }
