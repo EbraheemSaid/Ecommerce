@@ -1,0 +1,66 @@
+﻿using API.DTOs;
+using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+
+namespace API.Controllers
+{
+    public class AccountController(SignInManager<AppUser> signInManager) : BaseApiController
+    {
+        [HttpPost("register")]
+        public async Task<ActionResult> Register(RegisterDto registerDto)
+        {
+            AppUser user = new()
+            {
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName,
+                Email = registerDto.Email,
+                UserName = registerDto.Email
+            };
+            var result = await signInManager.UserManager.CreateAsync(user, registerDto.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
+        }
+
+
+        [HttpGet("user-info")]
+        public async Task<ActionResult> GetUserInfo()
+        {
+            if (User.Identity?.IsAuthenticated == false) return NoContent();
+
+            var user = await signInManager.UserManager.Users
+                .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+
+            if (user == null) return Unauthorized();
+
+            return Ok(new
+            {
+                user.FirstName,
+                user.LastName,
+                user.Email,
+
+            });
+
+        }
+        [HttpGet]
+        public ActionResult GetAuthState()
+        {
+            return Ok(new { isAuthenticated = User.Identity?.IsAuthenticated ?? false });
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<ActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return NoContent();
+        }
+    }
+}
