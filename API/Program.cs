@@ -41,6 +41,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
+    .AllowCredentials()
     .WithOrigins("https://localhost:4200", "https://localhost:4200")); // Adjust the origin as needed
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>();

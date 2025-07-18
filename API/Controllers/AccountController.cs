@@ -1,4 +1,5 @@
 ﻿using API.DTOs;
+using API.Extensions;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,7 +25,11 @@ namespace API.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+                return ValidationProblem();
             }
             return Ok();
         }
@@ -35,17 +40,14 @@ namespace API.Controllers
         {
             if (User.Identity?.IsAuthenticated == false) return NoContent();
 
-            var user = await signInManager.UserManager.Users
-                .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-
-            if (user == null) return Unauthorized();
+            var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
 
             return Ok(new
             {
                 user.FirstName,
                 user.LastName,
                 user.Email,
-
+                Address = user.Address?.ToAddressDto()
             });
 
         }
@@ -61,6 +63,24 @@ namespace API.Controllers
         {
             await signInManager.SignOutAsync();
             return NoContent();
+        }
+        [Authorize]
+        [HttpPost("address")]
+        public async Task<ActionResult<Address>> CreateOrUpdateAddress(AddressDto addressDto) 
+        {
+            var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
+            if (user.Address == null) 
+            {
+                user.Address = addressDto.ToAddress();
+            }
+            else 
+            {
+                user.Address.UpdateFromDto(addressDto);
+            }
+
+            var result = await signInManager.UserManager.UpdateAsync(user);
+            if (!result.Succeeded) return BadRequest(result.Errors);
+            return Ok(user.Address?.ToAddressDto());
         }
     }
 }
