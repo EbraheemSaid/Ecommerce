@@ -1,0 +1,122 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  margin-top: -120px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 2.7rem 2.2rem 2.2rem 2.2rem;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(30, 30, 100, 0.13),
+    0 1.5px 8px rgba(0, 0, 0, 0.06);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+mat-card-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+mat-card-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #22223b;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+button[type="submit"] {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  border-radius: 8px;
+  background: #7d00fa !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(125, 0, 250, 0.1);
+  transition: background 0.2s, box-shadow 0.2s;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  width: 100%;
+  padding: 0.9em 0;
+}
+button[type="submit"]:hover:not(:disabled) {
+  background: #5a009e !important;
+  box-shadow: 0 4px 16px rgba(125, 0, 250, 0.13);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.register-link a {
+  color: #005bea;
+  text-decoration: underline;
+  margin-left: 0.3em;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.register-link a:hover {
+  color: #7d00fa;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+  background: #ffeaea;
+  border-radius: 6px;
+  padding: 0.5em 0.8em;
+  box-shadow: 0 1px 4px rgba(211, 47, 47, 0.07);
+}
+
+// Password toggle button styling
+.password-toggle {
+  color: #7d00fa !important;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  background-color: rgba(125, 0, 250, 0.1) !important;
+  color: #5a009e !important;
+  transform: scale(1.1);
+}
+
+.password-toggle:active {
+  transform: scale(0.95);
+  background-color: rgba(125, 0, 250, 0.2) !important;
+}
+
+.password-toggle mat-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}

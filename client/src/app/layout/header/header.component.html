@@ -25,8 +25,45 @@
       >
         <mat-icon>shopping_cart</mat-icon>
       </a>
-      <button mat-stroked-button>Login</button>
-      <button mat-stroked-button>Register</button>
+
+      @if (accountService.currentUser()) {
+      <!-- User is logged in -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-lg">
+          <mat-icon class="text-purple-600">account_circle</mat-icon>
+          <span class="text-sm font-medium">{{
+            accountService.currentUser()?.firstName
+          }}</span>
+        </div>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="logout()"
+          class="flex items-center gap-1"
+        >
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+      } @else {
+      <!-- User is not logged in -->
+      <button
+        mat-stroked-button
+        routerLink="/account/login"
+        routerLinkActive="active"
+      >
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+      <button
+        mat-stroked-button
+        routerLink="/account/register"
+        routerLinkActive="active"
+      >
+        <mat-icon>person_add</mat-icon>
+        Register
+      </button>
+      }
     </div>
   </div>
 </header>
