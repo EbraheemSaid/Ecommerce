@@ -9,7 +9,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   busyService.busy();
 
   return next(req).pipe(
-    delay(500), // Simulate a delay of 1 second
+    delay(600), // Simulate a delay of 1 second
     finalize(() => {
       busyService.idle();
     })

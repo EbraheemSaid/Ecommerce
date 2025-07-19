@@ -1,0 +1,267 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start; // Changed from center to flex-start
+  justify-content: center;
+  background: #fff;
+  padding: 1rem;
+  padding-top: 0px;
+  margin-top: -80px; // Pull the container up more to reduce the gap
+  box-sizing: border-box; // Ensure padding is included in height calculation
+
+  // Add responsive adjustments for zoom and smaller screens
+  @media (max-width: 768px) {
+    margin-top: -70px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: -60px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(30, 30, 100, 0.13),
+    0 1.5px 8px rgba(0, 0, 0, 0.06);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: auto; // Center the card vertically and horizontally
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem 0.75rem;
+    gap: 1rem;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.name-fields {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+
+  // Stack name fields on small screens
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.half-width {
+  flex: 1;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+  background: #ffeaea;
+  border-radius: 6px;
+  padding: 0.5em 0.8em;
+  box-shadow: 0 1px 4px rgba(211, 47, 47, 0.07);
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    padding: 0.4em 0.6em;
+    margin-bottom: 0.75rem;
+  }
+}
+
+button[type="submit"] {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  border-radius: 8px;
+  background: #7d00fa !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(125, 0, 250, 0.1);
+  transition: background 0.2s, box-shadow 0.2s;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  width: 100%;
+  padding: 0.9em 0;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 0.8em 0;
+  }
+}
+button[type="submit"]:hover:not(:disabled) {
+  background: #5a009e !important;
+  box-shadow: 0 4px 16px rgba(125, 0, 250, 0.13);
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #444;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+}
+
+.login-link a {
+  color: #005bea;
+  text-decoration: underline;
+  margin-left: 0.3em;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.login-link a:hover {
+  color: #7d00fa;
+}
+
+// Responsive heading
+h2 {
+  @media (max-width: 480px) {
+    font-size: 1.6rem !important;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 1.4rem !important;
+  }
+}
+
+// Password toggle button styling
+.password-toggle {
+  color: #7d00fa !important;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+.password-toggle:hover {
+  background-color: rgba(125, 0, 250, 0.1) !important;
+  color: #5a009e !important;
+  transform: scale(1.1);
+}
+
+.password-toggle:active {
+  transform: scale(0.95);
+  background-color: rgba(125, 0, 250, 0.2) !important;
+}
+
+.password-toggle mat-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+
+  @media (max-width: 480px) {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+// Validation Errors Styling
+.validation-errors {
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(245, 101, 101, 0.1);
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+  }
+}
+
+.error-title {
+  color: #c53030;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.error-icon {
+  color: #c53030 !important;
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+
+  @media (max-width: 480px) {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+.error-list {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+
+  @media (max-width: 480px) {
+    padding-left: 1.25rem;
+  }
+}
+
+.error-item {
+  color: #c53030;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

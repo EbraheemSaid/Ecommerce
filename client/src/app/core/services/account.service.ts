@@ -17,7 +17,6 @@ export class AccountService {
     params = params.append('useCookies', true);
     return this.http.post<User>(this.baseUrl + 'login', model, {
       params,
-      withCredentials: true,
     });
   }
 
@@ -26,9 +25,7 @@ export class AccountService {
   }
 
   getUserInfo() {
-    return this.http.get<User>(this.baseUrl + 'account/user-info', {
-      withCredentials: true,
-    });
+    return this.http.get<User>(this.baseUrl + 'account/user-info');
   }
 
   loadUserInfo() {
@@ -39,11 +36,7 @@ export class AccountService {
   }
 
   logout() {
-    return this.http.post(
-      this.baseUrl + 'account/logout',
-      {},
-      { withCredentials: true }
-    );
+    return this.http.post(this.baseUrl + 'account/logout', {});
   }
 
   updateAddress(address: Address) {
