@@ -11,6 +11,7 @@ import { LoginComponent } from './features/account/login/login.component';
 import { RegisterComponent } from './features/account/register/register.component';
 import { authGuard } from './core/guards/auth.guard';
 import { requireAuthGuard } from './core/guards/require-auth.guard';
+import { emptyCartGuard } from './core/guards/empty-cart.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +21,7 @@ export const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
-    canActivate: [requireAuthGuard],
+    canActivate: [requireAuthGuard, emptyCartGuard],
   },
   {
     path: 'account/login',
