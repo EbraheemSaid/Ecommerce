@@ -16,7 +16,7 @@ namespace API.Controllers
             return Ok(cart ?? new Cart { Id = id });
         }
         [HttpPost]
-        public async Task<ActionResult<Cart>> UpdadeCart(Cart cart)
+        public async Task<ActionResult<Cart>> UpdateCart(Cart cart)
         {
 
             var created = await cartService.AddCartAsync(cart);
